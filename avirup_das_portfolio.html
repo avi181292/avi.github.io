@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avirup Das — Senior Business Analyst, BFSI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1D2E;
+    --ink-2:#152B41;
+    --ink-3:#1C3552;
+    --paper:#F1ECDD;
+    --paper-dim:#E7E0CC;
+    --brass:#C08A44;
+    --brass-bright:#D9A65E;
+    --green:#3E7259;
+    --hairline:rgba(241,236,221,0.16);
+    --text-dim:rgba(241,236,221,0.58);
+    --text-mid:rgba(241,236,221,0.78);
+    --radius:2px;
+    --spine-w:56px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  a{color:inherit;}
+  h1,h2,h3{font-family:'Newsreader', serif; font-weight:500; margin:0;}
+
+  /* ===== Spine / binding ===== */
+  .spine{
+    position:fixed;
+    top:0; left:0; bottom:0;
+    width:var(--spine-w);
+    background:linear-gradient(180deg,#0B1622,#101F31 40%,#0B1622);
+    border-right:1px solid var(--hairline);
+    z-index:50;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:28px 0;
+  }
+  .spine .holes{
+    display:flex; flex-direction:column; gap:26px;
+    flex:1;
+    align-items:center;
+    padding-top:8px;
+  }
+  .spine .hole{
+    width:9px; height:9px; border-radius:50%;
+    background:var(--ink);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.04);
+    border:1px solid rgba(241,236,221,0.12);
+  }
+  .spine .vert-label{
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.28em;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    margin-top:18px;
+  }
+
+  .page{ margin-left:var(--spine-w); }
+
+  /* ===== Nav ===== */
+  .navbar{
+    position:sticky;
+    top:0;
+    z-index:40;
+    background:rgba(15,29,46,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--hairline);
+  }
+  .navbar-inner{
+    max-width:980px;
+    margin:0 auto;
+    padding:0 32px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .navbar-inner::-webkit-scrollbar{display:none;}
+  .navbar-brand{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    color:var(--brass-bright);
+    padding:16px 18px 16px 0;
+    white-space:nowrap;
+    border-right:1px solid var(--hairline);
+    margin-right:8px;
+  }
+  .navlink{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.06em;
+    color:var(--text-dim);
+    text-decoration:none;
+    white-space:nowrap;
+    padding:16px 12px;
+    border-bottom:2px solid transparent;
+    transition:color 0.2s ease, border-color 0.2s ease;
+  }
+  .navlink:hover{ color:var(--paper); }
+  .navlink.active{
+    color:var(--brass-bright);
+    border-bottom-color:var(--brass);
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    max-width:980px;
+    margin:0 auto;
+    padding:96px 32px 64px;
+  }
+  .hero .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--brass-bright);
+    margin-bottom:22px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .hero .eyebrow::before{
+    content:"";
+    width:26px; height:1px; background:var(--brass);
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(40px, 7vw, 74px);
+    line-height:1.02;
+    color:var(--paper);
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{ font-style:italic; color:var(--brass-bright); }
+  .hero .role-line{
+    margin-top:20px;
+    font-size:19px;
+    color:var(--text-mid);
+    max-width:640px;
+  }
+  .hero .meta-row{
+    margin-top:36px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--text-dim);
+  }
+  .hero .meta-row a{ color:var(--paper); text-decoration:none; border-bottom:1px solid var(--brass); }
+  .hero .meta-row span.label{ color:var(--brass-bright); margin-right:6px; }
+
+  .ledger-summary{
+    margin-top:56px;
+    background:var(--ink-2);
+    border:1px solid var(--hairline);
+    border-left:3px solid var(--brass);
+    padding:28px 30px;
+  }
+  .ledger-summary .cap{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    margin-bottom:14px;
+  }
+  .ledger-summary p{ margin:0 0 12px; color:var(--text-mid); font-size:15px; }
+  .ledger-summary p:last-child{ margin-bottom:0; }
+  .ledger-summary .figure{ color:var(--brass-bright); font-family:'IBM Plex Mono', monospace; font-weight:600; }
+
+  /* running balance strip */
+  .balance-strip{
+    max-width:980px;
+    margin:0 auto;
+    padding:0 32px 64px;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1px;
+    background:var(--hairline);
+    border:1px solid var(--hairline);
+  }
+  .balance-cell{
+    background:var(--ink);
+    padding:22px 20px;
+  }
+  .balance-cell .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:28px;
+    color:var(--brass-bright);
+    font-weight:600;
+  }
+  .balance-cell .lbl{
+    margin-top:6px;
+    font-size:12px;
+    color:var(--text-dim);
+    letter-spacing:0.03em;
+  }
+
+  /* ===== Section shell ===== */
+  section.block{
+    max-width:980px;
+    margin:0 auto;
+    padding:64px 32px;
+    border-top:1px solid var(--hairline);
+  }
+  .block-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:36px;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .block-head h2{
+    font-size:30px;
+    color:var(--paper);
+  }
+  .block-head .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--brass);
+  }
+
+  /* ===== Skills ledger ===== */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0 40px;
+  }
+  .skill-row{
+    padding:16px 0;
+    border-bottom:1px solid var(--hairline);
+  }
+  .skill-row .cat{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--brass-bright);
+    letter-spacing:0.05em;
+    margin-bottom:8px;
+  }
+  .skill-row .items{
+    color:var(--text-mid);
+    font-size:14.5px;
+    line-height:1.65;
+  }
+
+  /* ===== Experience — statement entries ===== */
+  .entry{
+    scroll-margin-top:90px;
+    padding:40px 0;
+    border-bottom:1px solid var(--hairline);
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:32px;
+  }
+  .entry:last-child{ border-bottom:none; }
+  .entry .when{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--text-dim);
+    letter-spacing:0.03em;
+    line-height:1.7;
+  }
+  .entry .when .duration{
+    display:inline-block;
+    margin-top:10px;
+    padding:4px 9px;
+    border:1px solid var(--brass);
+    border-radius:999px;
+    color:var(--brass-bright);
+    font-size:10.5px;
+    letter-spacing:0.08em;
+  }
+  .entry .co-name{
+    font-size:24px;
+    color:var(--paper);
+  }
+  .entry .co-role{
+    margin-top:4px;
+    font-size:14.5px;
+    color:var(--brass-bright);
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .entry ul{
+    margin:18px 0 0;
+    padding-left:0;
+    list-style:none;
+  }
+  .entry ul li{
+    position:relative;
+    padding-left:20px;
+    margin-bottom:10px;
+    color:var(--text-mid);
+    font-size:14.5px;
+  }
+  .entry ul li::before{
+    content:"—";
+    position:absolute;
+    left:0;
+    color:var(--brass);
+  }
+  .entry .subprojects{
+    margin-top:22px;
+    display:grid;
+    gap:14px;
+  }
+  .subproj{
+    background:var(--ink-2);
+    border-left:2px solid var(--green);
+    padding:14px 18px;
+  }
+  .subproj .sp-title{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--paper);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .subproj p{ margin:0; color:var(--text-mid); font-size:13.5px; }
+
+  .impact-stamp{
+    margin-top:20px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--green);
+    border:1px dashed var(--green);
+    padding:8px 14px;
+  }
+  .impact-stamp::before{ content:"✓"; }
+
+  /* ===== Certifications ===== */
+  .cert-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+  .cert-seal{
+    border:1px solid var(--hairline);
+    padding:14px 18px;
+    font-size:13.5px;
+    color:var(--text-mid);
+    background:var(--ink-2);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .cert-seal .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--brass-bright);
+    flex-shrink:0;
+  }
+
+  /* ===== Education ===== */
+  .edu-item{
+    padding:16px 0;
+    border-bottom:1px solid var(--hairline);
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .edu-item:last-child{ border-bottom:none; }
+  .edu-item .deg{ color:var(--paper); font-size:15.5px; }
+  .edu-item .yr{ font-family:'IBM Plex Mono', monospace; color:var(--text-dim); font-size:13px; }
+
+  /* ===== Footer ===== */
+  footer{
+    max-width:980px;
+    margin:0 auto;
+    padding:60px 32px 100px;
+    text-align:center;
+  }
+  footer .fh{ font-size:26px; color:var(--paper); margin-bottom:14px; }
+  footer p{ color:var(--text-dim); font-size:14px; }
+  footer .contact-links{
+    margin-top:20px;
+    display:flex;
+    justify-content:center;
+    gap:26px;
+    flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+  }
+  footer .contact-links a{ text-decoration:none; border-bottom:1px solid var(--brass); }
+
+  @media (max-width:720px){
+    :root{ --spine-w:0px; }
+    .spine{ display:none; }
+    .page{ margin-left:0; }
+    .entry{ grid-template-columns:1fr; }
+    .skills-grid{ grid-template-columns:1fr; }
+    .balance-strip{ grid-template-columns:1fr 1fr; }
+    .hero{ padding-top:64px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="spine" aria-hidden="true">
+  <div class="holes">
+    <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+    <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+    <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+    <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+  </div>
+  <div class="vert-label">PASSBOOK · A. DAS</div>
+</div>
+
+<div class="page">
+
+  <nav class="navbar">
+    <div class="navbar-inner" id="navInner">
+      <span class="navbar-brand">A. DAS</span>
+      <a class="navlink" href="#summary">Summary</a>
+      <a class="navlink" href="#skills">Skills</a>
+      <a class="navlink" href="#mufg">MUFG Bank</a>
+      <a class="navlink" href="#bandhan">Bandhan Bank</a>
+      <a class="navlink" href="#indusnet">Indus Net</a>
+      <a class="navlink" href="#kfin">KFin Tech</a>
+      <a class="navlink" href="#icici">ICICI Bank</a>
+      <a class="navlink" href="#credentials">Credentials</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">Statement of Career · BFSI Domain</div>
+    <h1>Avirup Das<br><em>Senior Business Analyst</em></h1>
+    <p class="role-line">Agile delivery &amp; product ownership across lending, payments, mutual funds, digital banking, and supply-chain finance — turning stakeholder requirements into shipped, measurable outcomes.</p>
+    <div class="meta-row">
+      <div><span class="label">Location</span>Bengaluru, India</div>
+      <div><span class="label">Phone</span>+91 8250471416</div>
+      <div><span class="label">Mail</span><a href="mailto:avi181292das@gmail.com">avi181292das@gmail.com</a></div>
+      <div><span class="label">LinkedIn</span><a href="https://linkedin.com/in/18avi" target="_blank" rel="noopener">linkedin.com/in/18avi</a></div>
+    </div>
+
+    <div class="ledger-summary" id="summary">
+      <div class="cap">Account Summary</div>
+      <p>8+ years across Banking, Financial Services &amp; Investments — spanning requirement analysis, Agile delivery, and product ownership for lending, payments, mutual funds, digital banking, and supply-chain finance platforms.</p>
+      <p>Currently blends Business Analysis with Product Owner and Scrum Master duties at MUFG Bank, owning backlog, sprint ceremonies, and story validation for a Trade Payables platform used by corporate buyers and suppliers.</p>
+      <p>Measurable record: e-mandate registration lifted from <span class="figure">4% → 52%</span> via NPCI-compliant redesign · legacy settlement re-engineered for a <span class="figure">~84%</span> efficiency gain · functional-risk audit score of <span class="figure">8/10</span>.</p>
+    </div>
+  </header>
+
+  <div class="balance-strip" aria-label="Career highlights">
+    <div class="balance-cell"><div class="num">8+</div><div class="lbl">Years in BFSI delivery</div></div>
+    <div class="balance-cell"><div class="num">5</div><div class="lbl">Institutions served</div></div>
+    <div class="balance-cell"><div class="num">10–15</div><div class="lbl">Team size led, cross-functional</div></div>
+    <div class="balance-cell"><div class="num">7.3/10</div><div class="lbl">Client delivery success ratio</div></div>
+  </div>
+
+  <section class="block" id="skills">
+    <div class="block-head">
+      <h2>Core Ledger of Skills</h2>
+      <span class="tag">Capabilities</span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-row">
+        <div class="cat">Business Analysis</div>
+        <div class="items">Requirement Elicitation, BRD/FRD/FSD, SRS, User Stories, GAP Analysis (As-Is/To-Be), Wireframing &amp; Information Architecture, RFP/RFQ Response, Change Request Management</div>
+      </div>
+      <div class="skill-row">
+        <div class="cat">Agile &amp; Delivery</div>
+        <div class="items">Scrum Master, Sprint Planning &amp; Estimation, Backlog Management, Daily Scrum Ceremonies, JIRA, Waterfall, Project Milestone Tracking</div>
+      </div>
+      <div class="skill-row">
+        <div class="cat">Testing &amp; QA</div>
+        <div class="items">UAT Design &amp; Execution, API Testing (Postman, SOAP UI), Functional &amp; Sanity Testing, Test Case Documentation</div>
+      </div>
+      <div class="skill-row">
+        <div class="cat">Domain Expertise</div>
+        <div class="items">Retail &amp; Digital Banking (OBDX), Lending (LOS/LMS), Mutual Funds, Supply Chain Finance, Trade Payables, Cards &amp; Payments, Credit Risk</div>
+      </div>
+      <div class="skill-row">
+        <div class="cat">Stakeholder &amp; Vendor Management</div>
+        <div class="items">Client Interaction, Cross-Functional Team Facilitation, Vendor/API Integration, Presentation &amp; Communication</div>
+      </div>
+      <div class="skill-row">
+        <div class="cat">Tools &amp; Reporting</div>
+        <div class="items">SQL Server Management Studio, Power BI, Power Automate, UiPath, Lucidchart, Draw.io, Figma, MS Office</div>
+      </div>
+      <div class="skill-row" style="grid-column:1/-1;">
+        <div class="cat">AI-Augmented BA &amp; Scrum Delivery</div>
+        <div class="items">ChatGPT/Copilot for user story &amp; acceptance-criteria drafting, BRD/FRD summarization, sprint report &amp; retrospective note generation, and meeting-minutes automation</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="experience-head" style="padding-bottom:0; border-top:1px solid var(--hairline);">
+    <div class="block-head">
+      <h2>Professional Experience</h2>
+      <span class="tag">Statement of Transactions</span>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0;">
+
+    <article class="entry" id="mufg">
+      <div class="when">Dec 2024 — Present<br><span class="duration">Current role</span></div>
+      <div>
+        <div class="co-name">MUFG Bank</div>
+        <div class="co-role">Product Owner (Offshore) / Scrum Master</div>
+        <ul>
+          <li>Co-own the product backlog for a Trade Payables (Supply Chain Finance) platform with Buyer and Supplier portals covering invoice upload, settlement tracking, and credit visibility for corporate end users.</li>
+          <li>Serve as Scrum Master for a 10-member cross-functional team, running daily stand-ups, sprint planning, and estimation ceremonies.</li>
+          <li>Validate delivered stories in lower environments before release, maintaining backlog quality and improving sprint delivery predictability.</li>
+          <li>Translate business and stakeholder requirements into refined, delivery-ready user stories in close partnership with engineering.</li>
+          <li>Use generative-AI tools (ChatGPT, Copilot) daily to draft user stories and acceptance criteria, summarize BRDs/FRDs, generate sprint status reports and retrospective notes, and speed up stakeholder communication.</li>
+          <li>Design prompts for Microsoft 365 Copilot to generate recurring business and sprint reports, cutting down manual reporting effort.</li>
+          <li>Authored agent.md configuration files to automate recurring Scrum tasks, including one that gathers requirements from users, searches the knowledge base, and auto-creates JIRA stories in production.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="entry" id="bandhan">
+      <div class="when">Aug 2023 — Dec 2024<br><span class="duration">16 months</span></div>
+      <div>
+        <div class="co-name">Bandhan Bank</div>
+        <div class="co-role">Project Manager (Business Analyst)</div>
+        <ul>
+          <li>Led requirements, design, and delivery for OBDX (Retail Internet &amp; Mobile Banking) across E-Mandate/NACH, Credit Card, Debit Card, Payment Gateway, and monitoring workstreams.</li>
+        </ul>
+        <div class="subprojects">
+          <div class="subproj">
+            <div class="sp-title">E-Mandate / E-NACH</div>
+            <p>Gathered and validated requirements post-CBS migration, closed developer understanding gaps, and led UAT through production deployment. Implemented all NPCI-prescribed test scenarios and a transaction-status-check API.</p>
+          </div>
+          <div class="subproj">
+            <div class="sp-title">Credit Card</div>
+            <p>Designed OBDX as a customer-service channel for Credit Card; integrated with FISERV (Credit Card Management System) and OMNIDOC for statement downloads; led daily UAT status calls and issue tracking.</p>
+          </div>
+          <div class="subproj">
+            <div class="sp-title">Debit Card</div>
+            <p>Coordinated with Cortex (DCMS) to integrate and launch a new Debit Card variant via OBDX.</p>
+          </div>
+          <div class="subproj">
+            <div class="sp-title">Payment Gateways</div>
+            <p>Onboarded 5 payment gateways into OBDX — BillDesk, AirPay, PayU, EazyBuzz, and CC Avenue — plus GST payment support.</p>
+          </div>
+          <div class="subproj">
+            <div class="sp-title">Dynatrace Implementation</div>
+            <p>Implemented monitoring across APIs and core functionality with proactive alerting, enabling faster identification and resolution of production issues.</p>
+          </div>
+        </div>
+        <div class="impact-stamp">E-Mandate registration success lifted 4% → 52%</div>
+      </div>
+    </article>
+
+    <article class="entry" id="indusnet">
+      <div class="when">Jan 2022 — Aug 2023<br><span class="duration">19 months</span></div>
+      <div>
+        <div class="co-name">Indus Net Technologies</div>
+        <div class="co-role">Lead Business Analyst</div>
+        <ul>
+          <li>Led requirements gathering and solution design across 8 concurrent product lines, coordinating cross-functional design and development teams for on-schedule delivery.</li>
+        </ul>
+        <div class="subprojects">
+          <div class="subproj">
+            <div class="sp-title">Supply Chain Management</div>
+            <p>Designed and delivered dealer/supplier onboarding, dealer financing, supplier financing, and a BID module for financial institutions/banks.</p>
+          </div>
+          <div class="subproj">
+            <div class="sp-title">Mutual Fund Brand Site (CMS) &amp; Investor Portal</div>
+            <p>Directed frontend/backend design and integrations with MF Utility, CRISIL, payment gateways, and RTA.</p>
+          </div>
+          <div class="subproj">
+            <div class="sp-title">Personal Loan (LOS)</div>
+            <p>Designed and delivered the Loan Origination System portal for personal loan products.</p>
+          </div>
+          <div class="subproj">
+            <div class="sp-title">EMI on Debit Card</div>
+            <p>Delivered EMI-on-Debit-Card capability for both online (merchant) and offline (POS) channels.</p>
+          </div>
+          <div class="subproj">
+            <div class="sp-title">Service Portal</div>
+            <p>Designed a service portal with microservices, integrated with KIOSK and Internet Banking.</p>
+          </div>
+          <div class="subproj">
+            <div class="sp-title">Loan Management System (LMS)</div>
+            <p>Delivered LMS covering the full retail loan portfolio.</p>
+          </div>
+          <div class="subproj">
+            <div class="sp-title">Customer Onboarding Portal</div>
+            <p>Delivered onboarding solution including V-KYC.</p>
+          </div>
+          <div class="subproj">
+            <div class="sp-title">Related Party Transactions</div>
+            <p>Delivered a system to register, identify, and monitor related-party transactions with regulatory reporting.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="entry" id="kfin">
+      <div class="when">Sep 2021 — Jan 2022<br><span class="duration">5 months</span></div>
+      <div>
+        <div class="co-name">KFin Technologies</div>
+        <div class="co-role">Business Analyst</div>
+        <ul>
+          <li>Delivered backend design and API development for integration between the internal platform and Asset Management Company (AMC) systems.</li>
+          <li>Maintained daily transactional data for deals booked across AMC products.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="entry" id="icici">
+      <div class="when">Jul 2018 — Sep 2021<br><span class="duration">3 yr 2 mo</span></div>
+      <div>
+        <div class="co-name">ICICI Bank</div>
+        <div class="co-role">Application Owner (Business Analyst)</div>
+        <ul>
+          <li>Owned application roadmap and delivery across three core products supporting SME/MSME and Agri lending operations.</li>
+        </ul>
+        <div class="subprojects">
+          <div class="subproj">
+            <div class="sp-title">CFS — Channel Financing System</div>
+            <p>Owned settlement of overdraft payments for AGRI, SME &amp; MSME segments. Delivered new features and enhancements; integrated with ERP, Finacle, and Bureau/MIS reporting systems; replaced legacy file-based processing with real-time API-based transactions.</p>
+          </div>
+          <div class="subproj">
+            <div class="sp-title">C-Doc — Customer Document Management</div>
+            <p>Delivered a document management system for SME &amp; MSME loans, integrated with Omnidoc (DMS), with role-based access controls.</p>
+          </div>
+          <div class="subproj">
+            <div class="sp-title">Solid Valid</div>
+            <p>Built an application to compare two documents and flag mismatches/additions — used to verify signed client agreements and contracts against originals.</p>
+          </div>
+        </div>
+        <div class="impact-stamp">~84% improvement in settlement processing efficiency</div>
+      </div>
+    </article>
+
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>Additional Highlights</h2>
+      <span class="tag">Notes on Account</span>
+    </div>
+    <ul style="list-style:none; padding:0; margin:0; display:grid; gap:14px;">
+      <li style="color:var(--text-mid); font-size:14.5px; padding-left:20px; position:relative;"><span style="position:absolute;left:0;color:var(--brass);">—</span>Served as Pre-Sales &amp; Post-Sales Business Analyst — analyzed RFPs and tender documents, and facilitated proper documentation for client proposals.</li>
+      <li style="color:var(--text-mid); font-size:14.5px; padding-left:20px; position:relative;"><span style="position:absolute;left:0;color:var(--brass);">—</span>Presented concept UIs using low- and mid-fidelity wireframes and information architecture, improving stakeholder clarity on end products by ~50%.</li>
+      <li style="color:var(--text-mid); font-size:14.5px; padding-left:20px; position:relative;"><span style="position:absolute;left:0;color:var(--brass);">—</span>Constructed workflow charts, diagrams, and dashboards that reduced understanding gaps across teams by ~30%.</li>
+      <li style="color:var(--text-mid); font-size:14.5px; padding-left:20px; position:relative;"><span style="position:absolute;left:0;color:var(--brass);">—</span>Assessed functional risk during change requests, contributing to an audit score of 8/10.</li>
+    </ul>
+  </section>
+
+  <section class="block" id="credentials">
+    <div class="block-head">
+      <h2>Certifications</h2>
+      <span class="tag">Seals of Record</span>
+    </div>
+    <div class="cert-row">
+      <div class="cert-seal"><span class="dot"></span>Certified Scrum Product Owner (CSPO®) — Scrum Alliance</div>
+      <div class="cert-seal"><span class="dot"></span>SQL &amp; Relational Databases — IBM</div>
+      <div class="cert-seal"><span class="dot"></span>Data Visualization with Python — IBM</div>
+      <div class="cert-seal"><span class="dot"></span>Power BI Data Modelling — SkillUp</div>
+      <div class="cert-seal"><span class="dot"></span>Retail Credit Management in Digital Era — NIBM</div>
+      <div class="cert-seal"><span class="dot"></span>Mutual Fund Series V-A — NISM</div>
+      <div class="cert-seal"><span class="dot"></span>Depository Operations Series VI — NISM</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>Education</h2>
+      <span class="tag">Prior Balance</span>
+    </div>
+    <div class="edu-item">
+      <div class="deg">Post Graduate Diploma in Banking — Manipal Academy of Higher Education</div>
+      <div class="yr">2018</div>
+    </div>
+    <div class="edu-item">
+      <div class="deg">Bachelor of Computer Applications (BCA) — Gurunanak Institute of Technology</div>
+      <div class="yr">2016</div>
+    </div>
+    <div class="edu-item">
+      <div class="deg">Languages</div>
+      <div class="yr">English · Bengali · Hindi</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fh">Let's talk BFSI delivery.</div>
+    <p>Open to Business Analyst, Product Owner, and Scrum Master roles across banking, payments, and lending platforms.</p>
+    <div class="contact-links">
+      <a href="mailto:avi181292das@gmail.com">avi181292das@gmail.com</a>
+      <a href="tel:+918250471416">+91 8250471416</a>
+      <a href="https://linkedin.com/in/18avi" target="_blank" rel="noopener">linkedin.com/in/18avi</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Scroll-spy for nav
+  const links = Array.from(document.querySelectorAll('.navlink'));
+  const targets = links
+    .map(l => document.querySelector(l.getAttribute('href')))
+    .filter(Boolean);
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = '#' + entry.target.id;
+      const link = links.find(l => l.getAttribute('href') === id);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+  targets.forEach(t => io.observe(t));
+</script>
+
+</body>
+</html>
